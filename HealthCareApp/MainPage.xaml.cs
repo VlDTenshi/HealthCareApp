@@ -1,4 +1,6 @@
-﻿namespace HealthCareApp
+﻿using HealthCareApp.View;
+
+namespace HealthCareApp
 {
     public partial class MainPage : ContentPage
     {
@@ -32,6 +34,11 @@
                 Connectivity.Current.NetworkAccess == NetworkAccess.Internet;
 
             DisplayAlert("Is internet?", $"{isInternet}", "Ok");
+        }
+
+        private async void Button_Clicked_2(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(MedicineDetailsPage));
         }
     }
 

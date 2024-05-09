@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace HealthCareApp.Services
 {
-    public class MedicineService
+    public class ExerciseService
     {
         HttpClient _httpClient;
 
-        public MedicineService()
+        public ExerciseService()
         {
             _httpClient = new HttpClient();
         }
 
-        List<Medicine> medicineList = new();
-        public async Task<List<Medicine>> GetMedicines()
+        List<Exercise> exerciseList = new();
+        public async Task<List<Exercise>> GetExercises()
         {
-            if(medicineList?.Count > 0)
-                return medicineList;
+            if (exerciseList?.Count > 0)
+                return exerciseList;
 
             var url = "https://github.com/VlDTenshi/HealthCareApp/blob/master/HealthCareApp/Resources/Raw/medicinedata.json";
 
@@ -28,7 +28,7 @@ namespace HealthCareApp.Services
 
             if (response.IsSuccessStatusCode)
             {
-                medicineList = await response.Content.ReadFromJsonAsync<List<Medicine>>();
+                exerciseList = await response.Content.ReadFromJsonAsync<List<Exercise>>();
             }
 
             /*using var stream = await FileSystem.OpenAppPackageFileAsync("medicinedata.json");
@@ -36,7 +36,7 @@ namespace HealthCareApp.Services
             var contents = await reader.ReadToEndAsync();
             medicineList = JsonSerializer.Deserialize<List<Medicine>>(contents);*/
 
-            return medicineList;
+            return exerciseList;
         }
     }
 }

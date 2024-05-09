@@ -40,6 +40,11 @@
                 Text="Check internet connection"
                 Clicked="Button_Clicked_1"
                 HorizontalOptions="Fill"/>
+
+            <Button
+                Text="Medicines"
+                Clicked="Button_Clicked_2"
+                HorizontalOptions="Fill"/>
         </VerticalStackLayout>
     </ScrollView>
 

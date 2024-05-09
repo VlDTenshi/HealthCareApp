@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:HealthCareApp.Model"
+             xmlns:viewmodel="clr-namespace:HealthCareApp.ViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             x:DataType="viewmodel:ExercisesViewModel"
+             Title="{Binding Title}"
+             ios:Page.UseSafeArea="True"
+             x:Class="HealthCareApp.View.ExercisesPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid ColumnDefinitions="*,*"
+      ColumnSpacing="5"
+      RowDefinitions="*,Auto"
+      RowSpacing="0">
+        <RefreshView Grid.ColumnSpan="2"
+                     Command="{Binding GetExercisesCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView BackgroundColor="Beige"
+                    ItemsSource="{Binding Exercises}"
+                    SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                 WidthRequest="200"
+                                 HeightRequest="200">
+                        <Image Source="nodata.png"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Aspect="AspectFill"/>
+
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Exercise">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Padding="0" Style="{StaticResource CardView}">
+                            <Grid Padding="0"
+                              ColumnDefinitions="125, *">
+
+                                <Image Aspect="AspectFill"
+                                   Source="{Binding Image}"
+                                   WidthRequest="125"
+                                   HeightRequest="125"/>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                 Padding="10"
+                                                 VerticalOptions="Center">
+                                    <Label Text="{Binding Name}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        </RefreshView>
+        <Button Text="Get Hospitals"
+            Style="{StaticResource ButtonOutline}"
+            Command="{Binding GetHospitalCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+            Grid.Row="1"
+            Margin="8"/>
+
+        <Button Text="Find Closest"
+    Style="{StaticResource ButtonOutline}"
+    Command="{Binding GetClosestHospitalCommand}"
+    IsEnabled="{Binding IsNotBusy}"
+    Grid.Row="1"
+    Grid.Column="1"
+    Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                       IsRunning="{Binding IsBusy}"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Grid.RowSpan="2"
+                       Grid.Column="2"/>
+
+    </Grid>
+</ContentPage>

@@ -2,38 +2,59 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:HealthCareApp.Model"
+             xmlns:viewmodel="clr-namespace:HealthCareApp.ViewModel"
+             x:DataType="viewmodel:MedicinesViewModel"
              x:Class="HealthCareApp.View.MedicinesPage"
-             Title="MedicinesPage">
-    <CollectionView>
-        <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type model:Medicine}">
-                <model:Medicine 
-                    Name=""
-                    Image=""
-                    Manufacturer=""/>
-                <model:Medicine 
-                    Name=""
-                    Image=""
-                    Manufacturer=""/>
-                <model:Medicine 
-                    Name=""
-                    Image=""
-                    Manufacturer=""/>
-            </x:Array>
-        </CollectionView.ItemsSource>
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:Medicine">
-                <HorizontalStackLayout Padding="10">
-                    <Image Source="{Binding Image}"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Aspect="AspectFill"/>
-                    <VerticalStackLayout Padding="10" Spacing="4" VerticalOptions="Center">
-                        <Label Text="{Binding Name}" FontSize="24"/>
-                        <Label Text="{Binding Manufacturer}" FontSize="12"/>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+             Title="{Binding Title}">
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          RowSpacing="0">
+        <CollectionView BackgroundColor="Beige"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Medicines}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Medicine">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Padding="0" Style="{StaticResource CardView}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MedicinesViewModel}}, Path=GoToDetailsCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0"
+                          ColumnDefinitions="125, *">
+
+                                <Image Aspect="AspectFill"
+                               Source="{Binding Image}"
+                               WidthRequest="125"
+                               HeightRequest="125"/>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                             Padding="10"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding Name}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Get Medicines"
+        Command="{Binding GetMedicinesAsync}"
+        IsEnabled="{Binding IsNotBusy}"
+        Grid.Row="1"
+        Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                   IsRunning="{Binding IsBusy}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.RowSpan="2"
+                   Grid.Column="2"/>
+        
+    </Grid>
 </ContentPage>

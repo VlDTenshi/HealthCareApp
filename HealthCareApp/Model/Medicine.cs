@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HealthCareApp.Model
@@ -40,5 +41,11 @@ namespace HealthCareApp.Model
 
         //Image
         public string Image {  get; set; } 
+    }
+
+    [JsonSerializable(typeof(List<Medicine>))]
+    internal sealed partial class MedicineContext : JsonSerializerContext
+    {
+
     }
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:HealthCareApp.Model"
+             xmlns:viewmodel="clr-namespace:HealthCareApp.ViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             x:DataType="viewmodel:HospitalsViewModel"
+             x:Class="HealthCareApp.View.HospitalsPage"
+             Title="{Binding Title}"
+             ios:Page.UseSafeArea="True">
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          RowSpacing="0">
+
+        <CollectionView BackgroundColor="Beige"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Hospitals}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Hospital">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Padding="0" Style="{StaticResource CardView}">
+                            <Grid Padding="0"
+                                  ColumnDefinitions="125, *">
+
+                                <Image Aspect="AspectFill"
+                                       Source="{Binding Image}"
+                                       WidthRequest="125"
+                                       HeightRequest="125"/>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Name}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+
+        <Button Text="Get Hospitals"
+                Style="{StaticResource ButtonOutline}"
+                Command="{Binding GetHospitalCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Margin="8"/>
+
+        <Button Text="Find Closest"
+        Style="{StaticResource ButtonOutline}"
+        Command="{Binding GetClosestHospitalCommand}"
+        IsEnabled="{Binding IsNotBusy}"
+        Grid.Row="1"
+        Grid.Column="1"
+        Margin="8"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.Column="2"/>
+
+    </Grid>
+</ContentPage>

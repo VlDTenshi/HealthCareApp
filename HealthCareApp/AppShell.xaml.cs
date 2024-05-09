@@ -10,7 +10,9 @@ namespace HealthCareApp
 
             Routing.RegisterRoute("GreetingPage", typeof(GreetingsPage));
             Routing.RegisterRoute("InformationPage", typeof(InformationPage));
-
+            Routing.RegisterRoute(nameof(MedicineDetailsPage), typeof(MedicineDetailsPage));
+            Routing.RegisterRoute(nameof(HospitalDetailsPage), typeof(HospitalDetailsPage));
+            Routing.RegisterRoute(nameof(ExerciseDetailsPage), typeof(ExerciseDetailsPage));
             //Accept an event Navigated
             Navigated += OnNavigated;
         }
