@@ -44,8 +44,9 @@
         </CollectionView>
 
         <Button Text="Get Medicines"
-        Command="{Binding GetMedicinesAsync}"
+        Command="{Binding GetMedicinesCommand}"
         IsEnabled="{Binding IsNotBusy}"
+        Style="{StaticResource ButtonOutline}"
         Grid.Row="1"
         Margin="8"/>
 
@@ -53,6 +54,7 @@
                    IsRunning="{Binding IsBusy}"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="CenterAndExpand"
+                   Color="{StaticResource Primary}"
                    Grid.RowSpan="2"
                    Grid.Column="2"/>
         

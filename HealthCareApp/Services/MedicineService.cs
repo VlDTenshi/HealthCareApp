@@ -13,7 +13,7 @@ namespace HealthCareApp.Services
 
         public MedicineService()
         {
-            _httpClient = new HttpClient();
+            this._httpClient = new HttpClient();
         }
 
         List<Medicine> medicineList = new();
@@ -28,7 +28,7 @@ namespace HealthCareApp.Services
 
             if (response.IsSuccessStatusCode)
             {
-                medicineList = await response.Content.ReadFromJsonAsync<List<Medicine>>();
+                medicineList = await response.Content.ReadFromJsonAsync(MedicineContext.Default.ListMedicine);
             }
 
             /*using var stream = await FileSystem.OpenAppPackageFileAsync("medicinedata.json");

@@ -7,39 +7,38 @@
              Shell.PresentationMode="ModalAnimated"
              Title="{Binding Exercise.Name}">
     <ScrollView>
-        <VerticalStackLayout>
-            <Grid ColumnDefinitions="*,Auto,*"
-              RowDefinitions="160,auto">
 
-                <BoxView BackgroundColor="{StaticResource Primary}"
+        <Grid RowDefinitions="Auto,Auto,*">
+
+            <BoxView BackgroundColor="{StaticResource Primary}"
                      Grid.ColumnSpan="3"
                      HeightRequest="160"
                      HorizontalOptions="FillAndExpand"/>
-                <Frame Grid.RowSpan="2"
-                   Grid.Column="1"
-                   HeightRequest="160"
-                   CornerRadius="80"
-                   HorizontalOptions="Center"
-                   IsClippedToBounds="True"
-                   Padding="0"
-                   Margin="0,80,0,0">
-                    <Image Aspect="AspectFill"
-                       HeightRequest="160"
-                       WidthRequest="160"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Source="{Binding Exercise.Image}"/>
-                </Frame>
-                <Label 
+            <Border StrokeShape="RoundRectangle 80"
+                    Stroke="White"
+                    StrokeThickness="6"
+                    HeightRequest="172"
+                    WidthRequest="172"
+                    Margin="0,8,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Image Aspect="AspectFill"
+                        HeightRequest="160"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Source="{Binding Exercise.Image}"
+                        WidthRequest="160"/>
+            </Border>
+            <Label 
             Text="{Binding Exercise.Name}"
             FontSize="25"/>
-            </Grid>
+            
 
-            <VerticalStackLayout Padding="10" Spacing="10">
+            <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
                 <Label Text="{Binding Exercise.Description, StringFormat='Dosage: {0}'}"
                    Style="{StaticResource MediumLabel}"/>
             </VerticalStackLayout>
-        </VerticalStackLayout>
 
+        </Grid>
     </ScrollView>
 </ContentPage>

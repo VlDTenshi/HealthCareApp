@@ -16,7 +16,7 @@ namespace HealthCareApp.ViewModel
         bool isBusy;
 
         [ObservableProperty]
-        string title;
+        string? title;
 
         public bool IsNotBusy => !IsBusy;
     }

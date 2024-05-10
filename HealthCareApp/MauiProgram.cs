@@ -27,16 +27,20 @@ namespace HealthCareApp
 
             builder.Services.AddSingleton<MedicinesViewModel>();
             builder.Services.AddTransient<MedicineDetailsViewModel>();
+
             builder.Services.AddSingleton<HospitalsViewModel>();
             builder.Services.AddTransient<HospitalDetailsViewModel>();
+
             builder.Services.AddSingleton<ExercisesViewModel>();
             builder.Services.AddTransient<ExerciseDetailsViewModel>();
 
 
             builder.Services.AddSingleton<MedicinesPage>();
             builder.Services.AddTransient<MedicineDetailsPage>();
+
             builder.Services.AddSingleton<HospitalsPage>();
             builder.Services.AddTransient<HospitalDetailsPage>();
+
             builder.Services.AddSingleton<ExercisesPage>();
             builder.Services.AddTransient<ExerciseDetailsPage>();
 

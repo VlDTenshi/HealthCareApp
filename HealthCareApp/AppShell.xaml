@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:HealthCareApp"
+    xmlns:local2="clr-namespace:HealthCareApp.View"
     Shell.FlyoutBehavior="Flyout"
     Title="HealthCareApp">
 
@@ -29,5 +30,21 @@
         Title="Health"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    <ShellContent
+    Shell.NavBarIsVisible="True"
+    Title="Medicine"
+    ContentTemplate="{DataTemplate local2:MedicinesPage}"
+    Route="MedicinesPage" />
+    <ShellContent
+    Shell.NavBarIsVisible="True"
+    Title="Exercise"
+    ContentTemplate="{DataTemplate local2:ExercisesPage}"
+    Route="ExercisesPage" />
+    <ShellContent
+    Shell.NavBarIsVisible="True"
+    Title="Hospital"
+    ContentTemplate="{DataTemplate local2:HospitalsPage}"
+    Route="HospitalsPage" />
+    
 
 </Shell>

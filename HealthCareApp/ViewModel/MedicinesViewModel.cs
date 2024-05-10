@@ -10,14 +10,18 @@ namespace HealthCareApp.ViewModel
         public ObservableCollection<Medicine> Medicines { get; } = new();
 
         
-        public MedicinesViewModel( MedicineService medicineService) 
+        public MedicinesViewModel(MedicineService medicineService) 
         {
             Title = "Medicine Finder";
             this.medicineService = medicineService;
             
         }
-        
-        async Task GoToDetailsAsync(Medicine medicine)
+
+        //[ObservableProperty]
+        //bool IsRefreshing;
+
+        [RelayCommand]
+        async Task GoToDetails(Medicine medicine)
         {
             if (medicine is null)
                 return;
@@ -28,7 +32,9 @@ namespace HealthCareApp.ViewModel
                     {"Medicine", medicine }
                 });
         }
-        async Task GetMedicineAsync()
+
+        [RelayCommand]
+        async Task GetMedicinesAsync()
         {
             if (IsBusy)
                 return;
@@ -51,6 +57,7 @@ namespace HealthCareApp.ViewModel
             finally
             {
                 IsBusy = false;
+                //IsRefreshing = false;
             }
         }
     }

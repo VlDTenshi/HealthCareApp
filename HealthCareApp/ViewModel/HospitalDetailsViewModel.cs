@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthCareApp.ViewModel
 {
+    [QueryProperty(nameof(Hospital),"Hospital")]
     public partial class HospitalDetailsViewModel : BaseViewModel
     {
         IMap map;
@@ -17,7 +18,8 @@ namespace HealthCareApp.ViewModel
         [ObservableProperty]
         Hospital hospital;
 
-        async Task OpenMapAsync()
+        [RelayCommand]
+        async Task OpenMap()
         {
             try
             {

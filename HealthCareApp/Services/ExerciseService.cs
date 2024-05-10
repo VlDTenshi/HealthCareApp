@@ -13,7 +13,7 @@ namespace HealthCareApp.Services
 
         public ExerciseService()
         {
-            _httpClient = new HttpClient();
+            this._httpClient = new HttpClient();
         }
 
         List<Exercise> exerciseList = new();
@@ -22,15 +22,17 @@ namespace HealthCareApp.Services
             if (exerciseList?.Count > 0)
                 return exerciseList;
 
-            var url = "https://github.com/VlDTenshi/HealthCareApp/blob/master/HealthCareApp/Resources/Raw/medicinedata.json";
+            //Online
+            var url = "https://github.com/VlDTenshi/HealthCareApp/blob/master/HealthCareApp/Resources/Raw/exercisedata.json";
 
             var response = await _httpClient.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
-                exerciseList = await response.Content.ReadFromJsonAsync<List<Exercise>>();
+                exerciseList = await response.Content.ReadFromJsonAsync(ExerciseContext.Default.ListExercise);
             }
 
+            //Offline
             /*using var stream = await FileSystem.OpenAppPackageFileAsync("medicinedata.json");
             using var reader = new StreamReader(stream);
             var contents = await reader.ReadToEndAsync();

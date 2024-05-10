@@ -58,6 +58,8 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\loading_image.png" />
+	  <None Remove="Resources\Raw\exercisedata.json" />
+	  <None Remove="Resources\Raw\hospitaldata.json" />
 	  <None Remove="Resources\Raw\medicinedata.json" />
 	</ItemGroup>
 
@@ -71,6 +73,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\ExerciseDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\ExercisesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

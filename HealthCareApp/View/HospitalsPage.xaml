@@ -21,6 +21,11 @@
                 <DataTemplate x:DataType="model:Hospital">
                     <Grid Padding="10">
                         <Frame HeightRequest="125" Padding="0" Style="{StaticResource CardView}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HospitalsViewModel}}, Path=GoToDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
                             <Grid Padding="0"
                                   ColumnDefinitions="125, *">
 
@@ -44,7 +49,7 @@
 
         <Button Text="Get Hospitals"
                 Style="{StaticResource ButtonOutline}"
-                Command="{Binding GetHospitalCommand}"
+                Command="{Binding GetHospitalsCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 Grid.Row="1"
                 Margin="8"/>

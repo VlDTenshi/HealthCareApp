@@ -24,14 +24,18 @@ namespace HealthCareApp.ViewModel
             this.connectivity = connectivity;
             this.geolocation = geolocation;
         }
+        [ObservableProperty]
+        bool isRefreshing;
 
-        async Task GetClosestHospitalAsync()
+        [RelayCommand]
+        async Task GetClosestHospital()
         {
             if (IsBusy || Hospitals.Count == 0)
                 return;
             try
             {
                 
+                //Get cached location, else get real location.
                 var location = await geolocation.GetLastKnownLocationAsync();
                 if(location is null)
                 {
@@ -61,18 +65,21 @@ namespace HealthCareApp.ViewModel
                 await Shell.Current.DisplayAlert("Error!", $"Unable to get closest hospital: {ex.Message}", "Ok");
             }
         }
-        async Task GoToDetailsAsync(Hospital hospital)
+
+        [RelayCommand]
+        async Task GoToDetails(Hospital hospital)
         {
             if (hospital is null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(HospitalDetailsPage)}", true,
+            await Shell.Current.GoToAsync(nameof(HospitalDetailsPage), true,
                 new Dictionary<string, object>
                 {
                     {"Hospital", hospital }
                 });
         }
-        async Task GetHospitalAsync()
+        [RelayCommand]
+        async Task GetHospitalsAsync()
         {
             if (IsBusy)
                 return;
@@ -99,6 +106,7 @@ namespace HealthCareApp.ViewModel
             finally
             {
                 IsBusy = false;
+                IsRefreshing = false;
             }
         }
     }

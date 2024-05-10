@@ -11,4 +11,9 @@ public partial class GreetingsPage : ContentPage
     {
         await Shell.Current.GoToAsync("InformationPage");
     }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+    }
 }

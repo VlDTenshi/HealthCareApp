@@ -13,7 +13,7 @@ namespace HealthCareApp.Services
 
         public HospitalService()
         {
-            _httpClient = new HttpClient();
+            this._httpClient = new HttpClient();
         }
 
         List<Hospital> hospitalList = new();
@@ -22,13 +22,13 @@ namespace HealthCareApp.Services
             if (hospitalList?.Count > 0)
                 return hospitalList;
 
-            var url = "https://github.com/VlDTenshi/HealthCareApp/blob/master/HealthCareApp/Resources/Raw/medicinedata.json";
+            var url = "https://github.com/VlDTenshi/HealthCareApp/blob/master/HealthCareApp/Resources/Raw/hospitaldata.json";
 
             var response = await _httpClient.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
-                hospitalList = await response.Content.ReadFromJsonAsync<List<Hospital>>();
+                hospitalList = await response.Content.ReadFromJsonAsync(HospitalContext.Default.ListHospital);
             }
 
             /*using var stream = await FileSystem.OpenAppPackageFileAsync("medicinedata.json");

@@ -23,21 +23,16 @@
             <CollectionView BackgroundColor="Beige"
                     ItemsSource="{Binding Exercises}"
                     SelectionMode="None">
-                <CollectionView.EmptyView>
-                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center"
-                                 WidthRequest="200"
-                                 HeightRequest="200">
-                        <Image Source="nodata.png"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Aspect="AspectFill"/>
 
-                    </StackLayout>
-                </CollectionView.EmptyView>
-            <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Exercise">
                     <Grid Padding="10">
                         <Frame HeightRequest="125" Padding="0" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExercisesViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers> 
                             <Grid Padding="0"
                               ColumnDefinitions="125, *">
 
@@ -61,18 +56,10 @@
         </RefreshView>
         <Button Text="Get Hospitals"
             Style="{StaticResource ButtonOutline}"
-            Command="{Binding GetHospitalCommand}"
+            Command="{Binding GetExercisesCommand}"
             IsEnabled="{Binding IsNotBusy}"
             Grid.Row="1"
             Margin="8"/>
-
-        <Button Text="Find Closest"
-    Style="{StaticResource ButtonOutline}"
-    Command="{Binding GetClosestHospitalCommand}"
-    IsEnabled="{Binding IsNotBusy}"
-    Grid.Row="1"
-    Grid.Column="1"
-    Margin="8"/>
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                        IsRunning="{Binding IsBusy}"

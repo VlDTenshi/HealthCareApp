@@ -12,7 +12,7 @@ namespace HealthCareApp.ViewModel
     {
         ExerciseService exerciseService;
         public ObservableCollection<Exercise> Exercises { get; } = new();
-
+        
 
         public ExercisesViewModel(ExerciseService exerciseService)
         {
@@ -23,17 +23,19 @@ namespace HealthCareApp.ViewModel
         [ObservableProperty]
         bool isRefreshing;
 
-        async Task GoToDetailsAsync(Exercise exercise)
+        [RelayCommand]
+        async Task GoToDetails(Exercise exercise)
         {
             if (exercise is null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(ExerciseDetailsPage)}", true,
+            await Shell.Current.GoToAsync(nameof(ExerciseDetailsPage), true,
                 new Dictionary<string, object>
                 {
                     {"Exercise", exercise }
                 });
         }
+        [RelayCommand]
         async Task GetExercisesAsync()
         {
             
